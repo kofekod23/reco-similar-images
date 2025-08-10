@@ -1,0 +1,22 @@
+services:
+  weaviate:
+    image: cr.weaviate.io/semitechnologies/weaviate:1.32.2
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+      - "50051:50051"   
+    environment:
+      AUTHENTICATION_ANONYMOUS_ACCESS_ENABLED: "false"
+      AUTHENTICATION_APIKEY_ENABLED: "true"
+      AUTHENTICATION_APIKEY_ALLOWED_KEYS: "${WEAVIATE_API_KEY}"
+      AUTHENTICATION_APIKEY_USERS: "admin"
+      AUTHORIZATION_RBAC_ENABLED: "false"
+      AUTHORIZATION_RBAC_ROOT_USERS: "admin"      # ← donne le rôle root à 'admin'
+      AUTHENTICATION_DB_USERS_ENABLED: "true"     # ← optionnel: activer gestion des users à chaud
+
+      # IMPORTANT : aucun module de vectorisation ici → mode BYO vectors
+    volumes:
+      - weaviate_data:/var/lib/weaviate
+
+volumes:
+  weaviate_data:

@@ -1,0 +1,27 @@
+# secrets / env
+.env
+*.env
+weaviate-local/.env
+
+# environnements
+.venv/
+venv/
+
+# volumes / données locales
+weaviate_data/
+data/
+*.db
+
+# sauvegardes git
+.git.bak/
+
+# python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+
+# OS / IDE
+.DS_Store
+.vscode/
+.idea/
